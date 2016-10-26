@@ -21,10 +21,7 @@ import me.boomboompower.deathwalls.DeathWalls;
 import me.boomboompower.deathwalls.utils.Logging;
 import me.boomboompower.deathwalls.utils.SimpleScoreboard;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Statistic;
+import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
