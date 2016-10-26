@@ -23,39 +23,45 @@ import org.bukkit.entity.Player;
 
 public class Logging {
 
-   private Logging() {}
+    private Logging() {}
 
-   public static void sendToPlayer(Player player, String message) {
-       player.sendMessage(colored(message));
-   }
+    public static void sendToAll(String message) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            sendToPlayer(player, message);
+        }
+    }
 
-   @Deprecated
-   public static void logToConsole(String message) {
-       logToConsole(message, LogType.REGULAR);
-   }
+    public static void sendToPlayer(Player player, String message) {
+        player.sendMessage(colored(message));
+    }
 
-   public static void logToConsole(String message, LogType type) {
-       Bukkit.getConsoleSender().sendMessage(colored(type.getMessage() + message));
-   }
+    @Deprecated
+    public static void logToConsole(String message) {
+        logToConsole(message, LogType.REGULAR);
+    }
 
-   public static String colored(String message) {
-       return ChatColor.translateAlternateColorCodes('&', message);
-   }
+    public static void logToConsole(String message, LogType type) {
+        Bukkit.getConsoleSender().sendMessage(colored(type.getMessage() + message));
+    }
 
-   public enum LogType {
-       REGULAR("&f"),
-       WARNING("&6[WARNING] "),
-       ERROR("&c[ERROR] "),
-       UNKNOWN("&7[?] ");
+    public static String colored(String message) {
+        return ChatColor.translateAlternateColorCodes('&', message);
+    }
 
-       protected String message;
+    public enum LogType {
+        REGULAR("&f"),
+        WARNING("&6[WARNING] "),
+        ERROR("&c[ERROR] "),
+        UNKNOWN("&7[?] ");
 
-       LogType(String message) {
-           this.message = message;
-       }
+        protected String message;
 
-       public String getMessage() {
-           return message;
-       }
-   }
+        LogType(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
 }

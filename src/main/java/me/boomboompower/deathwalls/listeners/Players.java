@@ -18,22 +18,23 @@
 package me.boomboompower.deathwalls.listeners;
 
 import me.boomboompower.deathwalls.DeathWalls;
-import me.boomboompower.deathwalls.punishments.PlayerBanList;
 import me.boomboompower.deathwalls.utils.Logging;
 import me.boomboompower.deathwalls.utils.SimpleScoreboard;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.Statistic;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerPreLoginEvent;
 
 import java.util.ArrayList;
 
@@ -49,10 +50,10 @@ public class Players implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    private void onPreLogin(PlayerPreLoginEvent event) {
-        if (PlayerBanList.getIPBanList().contains(event.getAddress().toString())) {
-            event.disallow(PlayerPreLoginEvent.Result.KICK_BANNED, "Your IP is on the blacklist.");
-            Logging.logToConsole("&c" + event.getAddress().toString() + "&4 was denied access to the server.", Logging.LogType.WARNING);
+    private void onBlockBreak(BlockBreakEvent event) {
+        Location location = event.getBlock().getLocation();
+        for (int i = 0; i < 3; i++) {
+            event.getPlayer().playEffect(location, Effect.COLOURED_DUST, 0);
         }
     }
 
@@ -73,15 +74,11 @@ public class Players implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     private void onPlayerJoin(final PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (PlayerBanList.getNameBanList().contains(event.getPlayer().getName())) {
-            player.kickPlayer(Logging.colored("&cYou are banned"));
+        if (Bukkit.getOnlinePlayers().size() >= 8) {
+            player.kickPlayer("&cThe game is full!");
         } else {
-            if (Bukkit.getOnlinePlayers().size() >= 8) {
-                player.kickPlayer("&cThe game is full!");
-            } else {
-                players.add(player);
-                sendScoreboard(event.getPlayer());
-            }
+            players.add(player);
+            sendScoreboard(player);
         }
     }
 

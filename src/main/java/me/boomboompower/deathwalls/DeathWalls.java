@@ -18,6 +18,7 @@
 package me.boomboompower.deathwalls;
 
 import me.boomboompower.deathwalls.listeners.Players;
+import me.boomboompower.deathwalls.listeners.Spectators;
 import me.boomboompower.deathwalls.utils.Logging;
 
 import org.bukkit.Bukkit;
@@ -26,14 +27,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class DeathWalls extends JavaPlugin {
 
     private boolean offline = false;
-
-    public static void main(String[] args) {
-        System.out.printf("Cannot run %s from console. Run on %s", "\"DeathWalls\"", "\"Bukkit\"");
-    }
-
-    @Override
-    public void onLoad() {
-    }
 
     @Override
     public void onEnable() {
@@ -44,6 +37,7 @@ public final class DeathWalls extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
         } else {
             new Players(this);
+            new Spectators(this);
         }
     }
 

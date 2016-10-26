@@ -15,26 +15,34 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.boomboompower.deathwalls.punishments;
+package me.boomboompower.deathwalls.events;
 
-import java.util.ArrayList;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerEvent;
 
-public class PlayerBanList {
+public class PlayerSpectatorEvent extends PlayerEvent implements Cancellable {
 
-    private static ArrayList<String> ipBanList = new ArrayList<String>();
-    private static ArrayList<String> nameBanList = new ArrayList<String>();
+    private final HandlerList handlers = new HandlerList();
+    private boolean cancelled = false;
 
-    private PlayerBanList() {}
-
-    public static ArrayList<String> getNameBanList() {
-        nameBanList.clear();
-        nameBanList.add("Armorsmith");
-        return nameBanList;
+    public PlayerSpectatorEvent(Player player) {
+        super(player);
     }
 
-    public static ArrayList<String> getIPBanList() {
-        ipBanList.clear();
-        ipBanList.add("0.0.0.0");
-        return ipBanList;
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return this.cancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }
