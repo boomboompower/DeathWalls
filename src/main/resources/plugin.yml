@@ -1,0 +1,4 @@
+name: DeathWalls
+version: ${project.version}
+main: me.boomboompower.deathwalls.DeathWalls
+authors: [boomboompower]
