@@ -19,7 +19,7 @@ package me.boomboompower.deathwalls.listeners;
 
 import me.boomboompower.deathwalls.DeathWalls;
 import me.boomboompower.deathwalls.utils.Logging;
-import me.boomboompower.deathwalls.utils.SimpleScoreboard;
+import me.boomboompower.deathwalls.maker.SimpleScoreboard;
 
 import org.bukkit.*;
 import org.bukkit.entity.*;

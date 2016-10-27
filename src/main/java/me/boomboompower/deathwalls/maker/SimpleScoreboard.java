@@ -15,13 +15,14 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.boomboompower.deathwalls.utils;
+package me.boomboompower.deathwalls.maker;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import me.boomboompower.deathwalls.utils.Logging;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -35,6 +36,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A modified version of 'chuky025' code on a thread from spigot.
+ * https://www.spigotmc.org/threads/186646/
+ */
 public class SimpleScoreboard {
     private Objective obj;
     private Scoreboard scoreboard;
