@@ -53,11 +53,11 @@ public class ItemMaker {
 
     public void setLore(String... lore) {
         Validate.notNull(lore, "Lore cannot be null!");
-        List<String> l = new ArrayList<String>();
+        List<String> full = new ArrayList<String>();
         for (String s : lore) {
-            l.add(Logging.colored(s));
+            full.add(Logging.colored(s));
         }
-        itemMeta.setLore(l);
+        itemMeta.setLore(full);
     }
 
     public void setAmount(int amount) {
