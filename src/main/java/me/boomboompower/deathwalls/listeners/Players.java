@@ -49,8 +49,8 @@ public class Players implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     private void onBlockBreak(BlockBreakEvent event) {
         Location location = event.getBlock().getLocation();
-        for (int i = 0; i < 3; i++) {
-            event.getPlayer().playEffect(location, Effect.COLOURED_DUST, 0);
+        for (int i = 0; i < 6; i++) {
+            event.getPlayer().playEffect(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()), Effect.COLOURED_DUST, 0);
         }
     }
 
@@ -65,12 +65,15 @@ public class Players implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     private void onPlayerDamage(EntityDamageEvent event) {
-        if (event.getEntity() instanceof Player) sendScoreboard((Player) event.getEntity());
+        try {
+            sendScoreboard((Player) event.getEntity());
+        } catch (Exception ex) {}
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     private void onPlayerJoin(final PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        player.getActivePotionEffects().clear();
         if (Bukkit.getOnlinePlayers().size() >= 8) {
             player.kickPlayer("&cThe game is full!");
         } else {

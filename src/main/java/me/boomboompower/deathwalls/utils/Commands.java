@@ -17,11 +17,18 @@
 
 package me.boomboompower.deathwalls.utils;
 
+import me.boomboompower.deathwalls.DeathWalls;
+
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 
 public class Commands {
 
     private Commands() {}
+
+    public static void register(String command, DeathWalls deathWalls, CommandExecutor commandExecutor) {
+        deathWalls.getCommand(command).setExecutor(commandExecutor);
+    }
 
     public static boolean hasPermissionSilent(Player player, String permission) {
         return player.hasPermission(permission);

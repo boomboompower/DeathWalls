@@ -1,4 +1,8 @@
 name: DeathWalls
 version: ${project.version}
-main: me.boomboompower.deathwalls.DeathWalls
+main: me.boomboompower.v${special.version}.deathwalls.DeathWalls
 authors: [boomboompower]
+commands:
+   spectate:
+     description: Admin command
+     aliases: [spec, leave]

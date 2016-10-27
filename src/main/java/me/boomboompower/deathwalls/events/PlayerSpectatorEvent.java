@@ -19,20 +19,29 @@ package me.boomboompower.deathwalls.events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
+import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerEvent;
 
-public class PlayerSpectatorEvent extends PlayerEvent implements Cancellable {
+public class PlayerSpectatorEvent extends Event implements Cancellable {
 
-    private final HandlerList handlers = new HandlerList();
+    private static final HandlerList handlers = new HandlerList();
+    private Player player;
     private boolean cancelled = false;
 
     public PlayerSpectatorEvent(Player player) {
-        super(player);
+        this.player = player;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     @Override
     public HandlerList getHandlers() {
+        return handlers;
+    }
+
+    public static HandlerList getHandlerList() {
         return handlers;
     }
 
