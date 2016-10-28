@@ -20,6 +20,7 @@ package me.boomboompower.deathwalls;
 import me.boomboompower.deathwalls.listeners.Players;
 import me.boomboompower.deathwalls.listeners.Spectators;
 import me.boomboompower.deathwalls.utils.Logging;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class DeathWalls extends JavaPlugin {

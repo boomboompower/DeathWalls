@@ -22,6 +22,7 @@ import me.boomboompower.deathwalls.events.PlayerSpectatorEvent;
 import me.boomboompower.deathwalls.maker.Actionbar;
 import me.boomboompower.deathwalls.utils.Commands;
 import me.boomboompower.deathwalls.utils.Logging;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;

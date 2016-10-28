@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import me.boomboompower.deathwalls.utils.Logging;
+
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -80,16 +81,12 @@ public class SimpleScoreboard {
 
     private Map.Entry<Team, String> createTeam(String text) {
         String result;
-        if (text.length() <= 16) {
-            return new AbstractMap.SimpleEntry(null, text);
-        }
+        if (text.length() <= 16) return new AbstractMap.SimpleEntry(null, text);
         Team team = this.scoreboard.registerNewTeam("text-" + this.scoreboard.getTeams().size());
         Iterator<String> iterator = Splitter.fixedLength(16).split(text).iterator();
         team.setPrefix(iterator.next());
         result = iterator.next();
-        if (text.length() > 32) {
-            team.setSuffix(iterator.next());
-        }
+        if (text.length() > 32) team.setSuffix(iterator.next());
         this.teams.add(team);
         return new AbstractMap.SimpleEntry(team, result);
     }
@@ -100,14 +97,11 @@ public class SimpleScoreboard {
         obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         int index = this.scores.size();
-        for (Map.Entry<String, Integer> text : this.scores.entrySet())
-        {
+        for (Map.Entry<String, Integer> text : this.scores.entrySet()) {
             Map.Entry<Team, String> team = createTeam(text.getKey());
             Integer score = text.getValue() != null ? text.getValue() : index;
             String player = team.getValue();
-            if (team.getKey() != null) {
-                team.getKey().addPlayer(Bukkit.getOfflinePlayer(player));
-            }
+            if (team.getKey() != null) team.getKey().addPlayer(Bukkit.getOfflinePlayer(player));
             obj.getScore(player).setScore(score);
             index--;
         }
@@ -143,13 +137,10 @@ public class SimpleScoreboard {
                     t.unregister();
                 }
             }
-
             Map.Entry<Team, String> team = createTeam(text);
             OfflinePlayer player = Bukkit.getOfflinePlayer(team.getValue());
-            if (team.getKey() != null)
-                team.getKey().addPlayer(player);
+            if (team.getKey() != null) team.getKey().addPlayer(player);
             obj.getScore(player).setScore(score);
-
         }
     }
 }

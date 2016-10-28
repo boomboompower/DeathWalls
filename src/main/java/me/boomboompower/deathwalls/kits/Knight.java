@@ -19,32 +19,43 @@ package me.boomboompower.deathwalls.kits;
 
 import me.boomboompower.deathwalls.maker.ItemMaker;
 import me.boomboompower.interfaces.KitInfo;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-@KitInfo(name = "Armorer", creator = "boomboompower", version = "1.0")
-public final class Armorer {
+@KitInfo(name = "Knight", creator = "boomboompower", version = "1.0")
+public final class Knight {
 
-    public Armorer() {}
+    public Knight() {}
 
     public ItemStack getIcon() {
-        ItemMaker maker = new ItemMaker(Material.GOLD_CHESTPLATE);
+        ItemMaker maker = new ItemMaker(Material.WOOD_SWORD);
         maker.setUnbreakable(true);
-        maker.setLore("&7Golden Chestplate", "&7Golden Leggings", "&7Golden Boots");
-        maker.setName("&aArmorer");
+        maker.setLore("&7Golden Helmet", "  &8- Protection I", "&7Golden Sword", "  &8- Knockback I");
+        maker.setName("&aKnight");
         return maker.getItemStack();
     }
 
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
-        inventory.setChestplate(new ItemStack(Material.GOLD_CHESTPLATE));
-        inventory.setLeggings(new ItemStack(Material.GOLD_CHESTPLATE));
-        inventory.setBoots(new ItemStack(Material.GOLD_BOOTS));
+        inventory.setHelmet(getHelmet());
+        inventory.setItem(0, getSword());
         return inventory;
+    }
+
+    private ItemStack getHelmet() {
+        ItemMaker maker = new ItemMaker(Material.GOLD_HELMET);
+        maker.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        return maker.getItemStack();
+    }
+
+    private ItemStack getSword() {
+        ItemMaker maker = new ItemMaker(Material.GOLD_SWORD);
+        maker.addEnchantment(Enchantment.KNOCKBACK, 1);
+        return maker.getItemStack();
     }
 }

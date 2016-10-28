@@ -18,6 +18,7 @@
 package me.boomboompower.deathwalls.kits;
 
 import me.boomboompower.deathwalls.maker.ItemMaker;
+import me.boomboompower.interfaces.KitInfo;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -27,6 +28,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+@KitInfo(name = "Baseballer", creator = "boomboompower", version = "1.0")
 public final class Baseballer {
 
     public Baseballer() {}
@@ -34,8 +36,8 @@ public final class Baseballer {
     public ItemStack getIcon() {
         ItemMaker maker = new ItemMaker(Material.WOOD_SWORD);
         maker.setUnbreakable(true);
-        maker.setLore("&fIron helmet", "  &7- Protection I", "&fWooden sword", "  &7- Knockback II");
-        maker.setName("&bBaseballer");
+        maker.setLore("&7Iron Helmet", "  &8- Protection I", "&7Wooden Sword", "  &8- Knockback I");
+        maker.setName("&aBaseballer");
         return maker.getItemStack();
     }
 
@@ -54,7 +56,7 @@ public final class Baseballer {
 
     private ItemStack getSword() {
         ItemMaker maker = new ItemMaker(Material.WOOD_SWORD);
-        maker.addEnchantment(Enchantment.KNOCKBACK, 2);
+        maker.addEnchantment(Enchantment.KNOCKBACK, 1);
         return maker.getItemStack();
     }
 }

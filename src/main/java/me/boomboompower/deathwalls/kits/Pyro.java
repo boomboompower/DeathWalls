@@ -18,6 +18,7 @@
 package me.boomboompower.deathwalls.kits;
 
 import me.boomboompower.deathwalls.maker.ItemMaker;
+import me.boomboompower.interfaces.KitInfo;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -26,7 +27,9 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.potion.PotionEffectType;
 
+@KitInfo(name = "Pyro", creator = "boomboompower", version = "1.0")
 public final class Pyro {
 
     public Pyro() {}
@@ -34,8 +37,8 @@ public final class Pyro {
     public ItemStack getIcon() {
         ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
         maker.setUnbreakable(true);
-        maker.setLore("&fIron chestplate", "&fFlint and steel", "  &7- Unbreaking III", "  &7- Sharpness I", "&fLava bucket &7x5");
-        maker.setName("&bPyro");
+        maker.setLore("&fIron Chestplate", "&fFlint and Steel", "  &7- Unbreaking X", "&fLava bucket &7x5", "&fSplash Potion of Fire Resistance");
+        maker.setName("&aPyro");
         return maker.getItemStack();
     }
 
@@ -43,16 +46,22 @@ public final class Pyro {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
         inventory.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         inventory.setItem(0, getFlint());
+        inventory.setItem(6, getPotion());
         for (int i = 1; i < 6; i++) {
             inventory.setItem(i, new ItemStack(Material.LAVA_BUCKET));
         }
         return inventory;
     }
 
+    private ItemStack getPotion() {
+        ItemMaker maker = new ItemMaker(Material.SPLASH_POTION);
+        maker.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(Integer.MAX_VALUE, 0));
+        return maker.getItemStack();
+    }
+
     private ItemStack getFlint() {
         ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
-        maker.addEnchantment(Enchantment.DURABILITY, 3);
-        maker.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        maker.addEnchantment(Enchantment.DURABILITY, 10);
         return maker.getItemStack();
     }
 }

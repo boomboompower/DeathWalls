@@ -22,29 +22,38 @@ import me.boomboompower.interfaces.KitInfo;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-@KitInfo(name = "Armorer", creator = "boomboompower", version = "1.0")
-public final class Armorer {
+@KitInfo(name = "Armorsmith", creator = "boomboompower", version = "1.0")
+public final class Armorsmith {
 
-    public Armorer() {}
+    public Armorsmith() {}
 
     public ItemStack getIcon() {
-        ItemMaker maker = new ItemMaker(Material.GOLD_CHESTPLATE);
+        ItemMaker maker = new ItemMaker(Material.ANVIL);
         maker.setUnbreakable(true);
-        maker.setLore("&7Golden Chestplate", "&7Golden Leggings", "&7Golden Boots");
-        maker.setName("&aArmorer");
+        maker.setLore("&7Anvil", "&7Enchanted Book", "  &8- Protection IV", "  &8- Sharpness I", "&7Bottle o' Enchanting&8x64", "&7Diamond Helmet");
+        maker.setName("&aArmorsmith");
         return maker.getItemStack();
     }
 
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
-        inventory.setChestplate(new ItemStack(Material.GOLD_CHESTPLATE));
-        inventory.setLeggings(new ItemStack(Material.GOLD_CHESTPLATE));
-        inventory.setBoots(new ItemStack(Material.GOLD_BOOTS));
+        inventory.setHelmet(new ItemStack(Material.DIAMOND_HELMET));
+        inventory.setItem(0, new ItemStack(Material.ANVIL));
+        inventory.setItem(1, getBook());
+        inventory.setItem(2, new ItemStack(Material.EXP_BOTTLE, 64));
         return inventory;
+    }
+
+    private ItemStack getBook() {
+        ItemMaker maker = new ItemMaker(Material.ENCHANTED_BOOK);
+        maker.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        maker.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        return maker.getItemStack();
     }
 }
