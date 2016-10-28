@@ -102,12 +102,12 @@ public class Spectators implements Listener, CommandExecutor {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    private void onEvent(PlayerFishEvent event) {
+    private void onFish(PlayerFishEvent event) {
         cancel(event.getPlayer(), event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    private void onEvent(PlayerPortalEvent event) {
+    private void onPortalEnter(PlayerPortalEvent event) {
         cancel(event.getPlayer(), event);
     }
 
@@ -146,6 +146,8 @@ public class Spectators implements Listener, CommandExecutor {
         final Player player = event.getPlayer();
         player.setGameMode(GameMode.ADVENTURE);
         player.setAllowFlight(true);
+        player.setInvulnerable(true);
+        player.setSleepingIgnored(true);
         player.setPlayerListName(Logging.colored("&7" + player.getName()));
         for (Player onlinePlayers : Bukkit.getOnlinePlayers()) {
             player.hidePlayer(onlinePlayers);
