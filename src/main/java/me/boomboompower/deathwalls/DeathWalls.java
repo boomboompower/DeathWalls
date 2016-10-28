@@ -20,6 +20,7 @@ package me.boomboompower.deathwalls;
 import me.boomboompower.deathwalls.listeners.Players;
 import me.boomboompower.deathwalls.listeners.Spectators;
 import me.boomboompower.deathwalls.utils.Logging;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -27,9 +28,7 @@ public final class DeathWalls extends JavaPlugin {
 
     private boolean offline = false;
 
-    public static void main(String[] args) {
-
-    }
+    public static void main(String[] args) {}
 
     @Override
     public void onEnable() {
@@ -39,9 +38,10 @@ public final class DeathWalls extends JavaPlugin {
             Logging.logToConsole("Please switch to online mode to use this plugin!", Logging.LogType.WARNING);
             Bukkit.getPluginManager().disablePlugin(this);
         } else {
+            Logging.logToConsole("&bUser: &3" + System.getProperty("user.name") + "&b, user home dir: &3" + System.getProperty("user.home"));
             Logging.logToConsole("&bJava version: &3" + System.getProperty("java.version") + "&b, vendor: &3" + System.getProperty("java.vendor"));
             Logging.logToConsole("&bJava home: &3" + System.getProperty("java.home"));
-            Logging.logToConsole("&bOS name: &3" + System.getProperty("os.name") + "&b, version: &3" + System.getProperty("os.version") + "&b, arch: &3" + System.getProperty("os.arch") + "&b.");
+            Logging.logToConsole("&bOS name: &3" + System.getProperty("os.name") + "&b, OS version: &3" + System.getProperty("os.version") + "&b, OS arch: &3" + System.getProperty("os.arch") + "&b.");
             new Players(this);
             new Spectators(this);
         }

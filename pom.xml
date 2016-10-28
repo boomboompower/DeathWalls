@@ -68,12 +68,12 @@
                         </goals>
                         <configuration>
                             <minimizeJar>true</minimizeJar>
-                            <relocations>
-                                <relocation>
-                                    <pattern>me.boomboompower</pattern>
-                                    <shadedPattern>me.boomboompower.v${special.version}</shadedPattern>
-                                </relocation>
-                            </relocations>
+                            <!--<relocations>-->
+                                <!--<relocation>-->
+                                    <!--<pattern>me.boomboompower</pattern>-->
+                                    <!--<shadedPattern>me.boomboompower.v${special.version}</shadedPattern>-->
+                                <!--</relocation>-->
+                            <!--</relocations>-->
                         </configuration>
                     </execution>
                 </executions>

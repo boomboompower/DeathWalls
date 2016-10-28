@@ -96,13 +96,8 @@ public class ItemMaker {
         itemStack.getEnchantments().clear();
     }
 
-    @Deprecated
-    public void setDisplayName(String name) {
-        this.setName(name, false);
-    }
-
-    public void setName(String name, boolean real) {
-        if (real) itemMeta.setDisplayName(name != null ? Logging.colored(name) : "");
+    public void setName(String name) {
+        itemMeta.setDisplayName(name != null ? Logging.colored(name) : "");
     }
 
     public void setUnbreakable(boolean unbreakable) {

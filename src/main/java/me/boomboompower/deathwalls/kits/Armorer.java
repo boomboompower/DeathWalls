@@ -15,40 +15,34 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.boomboompower.deathwalls.maker;
+package me.boomboompower.deathwalls.kits;
 
-import me.boomboompower.deathwalls.utils.Logging;
+import me.boomboompower.deathwalls.maker.ItemMaker;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
-public class InventoryMaker {
+public final class Armorer {
 
-    private Inventory inventory = Bukkit.createInventory(null, 54, "Inventory");
+    public Armorer() {}
 
-    public InventoryMaker(String name, int columns) {
-        this.inventory = Bukkit.createInventory(null, columns * 9, Logging.colored(name));
-    }
-
-    public void setItem(ItemStack item, int slot) {
-        this.inventory.setItem(slot, item);
-    }
-
-    public void removeItem(int slot) {
-        setItem(new ItemStack(Material.AIR), slot);
-    }
-
-    public void removeItem(ItemStack item) {
-        this.inventory.remove(item);
-    }
-
-    public void removeAll() {
-        this.inventory.clear();
+    public ItemStack getIcon() {
+        ItemMaker maker = new ItemMaker(Material.GOLD_CHESTPLATE);
+        maker.setUnbreakable(true);
+        maker.setLore("&fGolden chestplate", "&fGolden leggings", "&fGolden boots");
+        maker.setName("&bArmorer");
+        return maker.getItemStack();
     }
 
     public Inventory getInventory() {
-        return this.inventory;
+        PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
+        inventory.setChestplate(new ItemStack(Material.GOLD_CHESTPLATE));
+        inventory.setLeggings(new ItemStack(Material.GOLD_CHESTPLATE));
+        inventory.setBoots(new ItemStack(Material.GOLD_BOOTS));
+        return inventory;
     }
 }

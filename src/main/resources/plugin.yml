@@ -1,6 +1,6 @@
 name: DeathWalls
 version: ${project.version}
-main: me.boomboompower.v${special.version}.deathwalls.DeathWalls
+main: me.boomboompower.deathwalls.DeathWalls
 authors: [boomboompower]
 commands:
    spectate:
