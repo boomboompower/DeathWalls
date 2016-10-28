@@ -30,13 +30,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
@@ -58,42 +59,93 @@ public class Spectators implements Listener, CommandExecutor {
     @EventHandler(priority = EventPriority.HIGH)
     private void onPlayerChat(PlayerChatEvent event) {
         Player player = event.getPlayer();
-        if (isSpectator(player)) {
-            event.setFormat(Logging.colored("&7" + player.getName() + ": " + event.getMessage()));
-            for (Player recipients : event.getRecipients()) {
-                if (!isSpectator(recipients)) {
-                    event.getRecipients().remove(recipients);
+        try {
+            if (isSpectator(player)) {
+                event.setFormat(Logging.colored("&7[SPECTATOR] " + player.getName() + ": " + event.getMessage()));
+                for (Player recipients : event.getRecipients()) {
+                    if (!isSpectator(recipients)) {
+                        event.getRecipients().remove(recipients);
+                    }
                 }
             }
-        }
+        } catch (Exception ex) {}
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     private void onBlockBreak(BlockBreakEvent event) {
-        if (isSpectator(event.getPlayer())) {
-            event.setCancelled(true);
-        }
+        cancel(event.getPlayer(), event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     private void onBlockPlace(BlockPlaceEvent event) {
-        if (isSpectator(event.getPlayer())) {
-            event.setCancelled(true);
-        }
+        cancel(event.getPlayer(), event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    private void onArmorStandManipulation(PlayerArmorStandManipulateEvent event) {
+        cancel(event.getPlayer(), event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    private void onArrowPickup(PlayerPickupArrowEvent event) {
+        cancel(event.getPlayer(), event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    private void onDamage(EntityDamageByEntityEvent event) {
+        if (event.getDamager() instanceof Player) cancel((Player) event.getDamager(), event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    private void onBucket(PlayerBucketEvent event) {
+        cancel(event.getPlayer(), event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    private void onEvent(PlayerFishEvent event) {
+        cancel(event.getPlayer(), event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    private void onEvent(PlayerPortalEvent event) {
+        cancel(event.getPlayer(), event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    private void onInteractEntity(PlayerInteractEntityEvent event) {
+        cancel(event.getPlayer(), event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    private void onEditBook(PlayerEditBookEvent event) {
+        cancel(event.getPlayer(), event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    private void onItemPickup(PlayerPickupItemEvent event) {
+        cancel(event.getPlayer(), event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    private void onBedEnter(PlayerBedEnterEvent event) {
+        cancel(event.getPlayer(), event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    private void onDropItem(PlayerDropItemEvent event) {
+        cancel(event.getPlayer(), event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     private void onInteract(PlayerInteractEvent event) {
-        if (isSpectator(event.getPlayer())) {
-            event.setCancelled(true);
-        }
+        cancel(event.getPlayer(), event);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     private void onSpectate(PlayerSpectatorEvent event) {
         final Player player = event.getPlayer();
-        player.setAllowFlight(true);
         player.setGameMode(GameMode.ADVENTURE);
+        player.setAllowFlight(true);
         player.setPlayerListName(Logging.colored("&7" + player.getName()));
         for (Player onlinePlayers : Bukkit.getOnlinePlayers()) {
             player.hidePlayer(onlinePlayers);
@@ -120,6 +172,8 @@ public class Spectators implements Listener, CommandExecutor {
             Player player = (Player) sender;
             if (!Commands.hasPermissionSilent(player, permission)) {
                 Logging.sendToPlayer(player, Commands.getDenyMessage());
+            } else if (isSpectator(player)) {
+                Logging.sendToPlayer(player, "&cSpectators cannot issue this command!");
             } else {
                 Logging.sendToAll("&e" + player.getName() + "&f was eliminated.");
                 addSpectator(player);
@@ -135,8 +189,12 @@ public class Spectators implements Listener, CommandExecutor {
     private void addSpectator(Player player) {
         PlayerSpectatorEvent event = new PlayerSpectatorEvent(player);
         Bukkit.getPluginManager().callEvent(event);
-        if (!event.isCancelled()) {
+        if (!event.isCancelled() && !spectators.contains(player)) {
             spectators.add(player);
         }
+    }
+
+    private void cancel(Player player, Cancellable event) {
+        if (isSpectator(player)) event.setCancelled(true);
     }
 }

@@ -59,7 +59,7 @@ public class Players implements Listener {
         sendScoreboard(event.getEntity().getKiller());
 
         for (Player player : players) {
-            Logging.sendToPlayer(player, "&e" + event.getEntity().getName() + "&f has been eliminated by &e" + event.getEntity().getKiller() + "&f!");
+            Logging.sendToPlayer(player, "&e" + event.getEntity().getName() + "&f has been eliminated by &e" + event.getEntity().getKiller().getName() + "&f!");
         }
     }
 
