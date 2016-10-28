@@ -87,11 +87,6 @@ public class Spectators implements Listener, CommandExecutor {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    private void onArrowPickup(PlayerPickupArrowEvent event) {
-        cancel(event.getPlayer(), event);
-    }
-
-    @EventHandler(priority = EventPriority.HIGH)
     private void onDamage(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player) cancel((Player) event.getDamager(), event);
     }
