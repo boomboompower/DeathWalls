@@ -18,6 +18,7 @@
 package me.boomboompower.deathwalls.kits;
 
 import me.boomboompower.deathwalls.maker.ItemMaker;
+import me.boomboompower.interfaces.Deprecation;
 import me.boomboompower.interfaces.KitInfo;
 
 import org.bukkit.Bukkit;
@@ -28,11 +29,15 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+@Deprecated
+@Deprecation(reason = "Replaced by the Fisherman kit", deprecatedBy = "boomboompower")
 @KitInfo(name = "Baseballer", creator = "boomboompower", version = "1.0")
 public final class Baseballer {
 
+    @Deprecated
     public Baseballer() {}
 
+    @Deprecated
     public ItemStack getIcon() {
         ItemMaker maker = new ItemMaker(Material.WOOD_SWORD);
         maker.setUnbreakable(true);
@@ -41,6 +46,7 @@ public final class Baseballer {
         return maker.getItemStack();
     }
 
+    @Deprecated
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
         inventory.setHelmet(getHelmet());
@@ -48,12 +54,14 @@ public final class Baseballer {
         return inventory;
     }
 
+    @Deprecated
     private ItemStack getHelmet() {
         ItemMaker maker = new ItemMaker(Material.IRON_HELMET);
         maker.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         return maker.getItemStack();
     }
 
+    @Deprecated
     private ItemStack getSword() {
         ItemMaker maker = new ItemMaker(Material.WOOD_SWORD);
         maker.addEnchantment(Enchantment.KNOCKBACK, 1);

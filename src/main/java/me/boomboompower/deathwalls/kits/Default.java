@@ -19,44 +19,34 @@ package me.boomboompower.deathwalls.kits;
 
 import me.boomboompower.deathwalls.maker.ItemMaker;
 import me.boomboompower.interfaces.KitInfo;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-@KitInfo(name = "Knight", creator = "boomboompower", version = "1.0")
-public final class Knight {
+@KitInfo(name = "Default", creator = "boomboompower", version = "1.0")
+public final class Default {
 
-    public Knight() {}
+    public Default() {}
 
     public ItemStack getIcon() {
         ItemMaker maker = new ItemMaker(Material.WOOD_SWORD);
         maker.setUnbreakable(true);
-        maker.setLore("&7Golden Helmet", "  &8- Protection I", "&7Golden Sword", "  &8- Sharpness II", "  &8- Unbreaking V");
-        maker.setName("&aKnight");
+        maker.setLore("&7Wooden Sword", "&7Leather Helmet", "&7Leather Chestplate", "&7Leather Leggings", "&7Leather Boots");
+        maker.setName("&aDefault");
         return maker.getItemStack();
     }
 
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
-        inventory.setHelmet(getHelmet());
-        inventory.setItem(0, getSword());
+        inventory.setHelmet(new ItemStack(Material.LEATHER_HELMET));
+        inventory.setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
+        inventory.setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
+        inventory.setBoots(new ItemStack(Material.LEATHER_BOOTS));
+        inventory.setItem(0, new ItemStack(Material.WOOD_SWORD));
         return inventory;
-    }
-
-    private ItemStack getHelmet() {
-        ItemMaker maker = new ItemMaker(Material.GOLD_HELMET);
-        maker.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        return maker.getItemStack();
-    }
-
-    private ItemStack getSword() {
-        ItemMaker maker = new ItemMaker(Material.GOLD_SWORD);
-        maker.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-        maker.addEnchantment(Enchantment.DURABILITY, 5);
-        return maker.getItemStack();
     }
 }

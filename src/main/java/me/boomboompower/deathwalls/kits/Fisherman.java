@@ -19,6 +19,7 @@ package me.boomboompower.deathwalls.kits;
 
 import me.boomboompower.deathwalls.maker.ItemMaker;
 import me.boomboompower.interfaces.KitInfo;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -35,24 +36,24 @@ public final class Fisherman {
     public ItemStack getIcon() {
         ItemMaker maker = new ItemMaker(Material.FISHING_ROD);
         maker.setUnbreakable(true);
-        maker.setLore("&7Fishing Rod", "  &8- Knockback II", "  &8- Luck of the Sea III", "  &8- Lure III", "&7Fish&8x16");
+        maker.setLore("&7Fishing Rod", "  &8- Knockback I", "  &8- Luck of the Sea X", "  &8- Lure VII", "&7Fish&8x16");
         maker.setName("&aFisherman");
         return maker.getItemStack();
     }
 
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
-        inventory.setHelmet(new ItemStack(Material.DIAMOND_HELMET));
         inventory.setItem(0, getRod());
-        inventory.setItem(2, new ItemStack(Material.EXP_BOTTLE, 64));
+        inventory.setItem(1, new ItemStack(Material.COOKED_FISH, 16));
         return inventory;
     }
 
     private ItemStack getRod() {
         ItemMaker maker = new ItemMaker(Material.FISHING_ROD);
-        maker.addEnchantment(Enchantment.KNOCKBACK, 2);
-        maker.addEnchantment(Enchantment.LUCK, 3);
-        maker.addEnchantment(Enchantment.LURE, 3);
+        maker.addEnchantment(Enchantment.DURABILITY, 10);
+        maker.addEnchantment(Enchantment.KNOCKBACK, 1);
+        maker.addEnchantment(Enchantment.LUCK, 10);
+        maker.addEnchantment(Enchantment.LURE, 7);
         return maker.getItemStack();
     }
 }

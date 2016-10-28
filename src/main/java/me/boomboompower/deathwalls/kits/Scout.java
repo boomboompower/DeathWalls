@@ -45,7 +45,7 @@ public final class Scout {
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
         inventory.setItem(0, new ItemStack(Material.STONE_SWORD));
-        inventory.setItem(0, getPotion());
+        inventory.setItem(1, getPotion());
         return inventory;
     }
 

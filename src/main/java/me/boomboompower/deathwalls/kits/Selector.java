@@ -28,12 +28,13 @@ public final class Selector {
     // TODO organization of the kits
     public Selector() {
         InventoryMaker maker = new InventoryMaker("Kit Selector", 2);
-        maker.setItem(new Armorsmith().getIcon(), 0);
-        maker.setItem(new Scout().getIcon(), 1);
-        maker.setItem(new Armorer().getIcon(), 2);
-        maker.setItem(new Pyro().getIcon(), 3);
-        maker.setItem(new Fisherman().getIcon(), 4);
-        maker.setItem(new Baseballer().getIcon(), 5);
+        maker.setItem(new Default().getIcon(), 0);
+        maker.setItem(new Armorsmith().getIcon(), 1);
+        maker.setItem(new Scout().getIcon(), 2);
+        maker.setItem(new Armorer().getIcon(), 3);
+        maker.setItem(new Pyro().getIcon(), 4);
+        maker.setItem(new Fisherman().getIcon(), 5);
+        maker.setItem(new Knight().getIcon(), 6);
         selector = maker.getInventory();
     }
 
