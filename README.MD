@@ -6,20 +6,20 @@ And this time I'm making sure that I'm following the original notes I made.
 
 ####Public Notes
 There are more, these are the ones I am choosing to release
-* 8 player game and 16 in teams
-* Different modes (teams, normal etc)
-* Natural regen disabled - need pots/gapples
-* Dead players go into specator mode
-* Players may choose projectile trails
+* 8 player game and 16 players in teams (x2 per team)
+* Different modes (teams, normal)
+* Natural regen disabled - need pots/golden apples to regenerate health
+* Dead players go into a spectator mode
+* Players may choose projectile trails (for snowballs, rods etc)
 * When a player is killed they drop a skull
-* Skulls can be used to buy equipment and regeneration
+* Skulls can be used to buy equipment and to buy regeneration
 * Multiple "balanced" kits
 
 ####Kits
 Current kits are as follows:
 * Armorsmith
 * Armorer
-* Baseballer [Removed]
+* Baseballer [Replaced by Fisherman]
 * Default
 * Fisherman
 * Knight
