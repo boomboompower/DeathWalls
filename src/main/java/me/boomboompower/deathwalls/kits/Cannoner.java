@@ -27,41 +27,33 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.potion.PotionEffectType;
 
-@KitInfo(name = "Pyro", creator = "boomboompower", version = "1.0")
-public final class Pyro {
+@KitInfo(name = "Cannoner", creator = "boomboompower", version = "1.0")
+public final class Cannoner {
 
-    public Pyro() {}
+    public Cannoner() {}
 
     public ItemStack getIcon() {
-        ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
+        ItemMaker maker = new ItemMaker(Material.TNT);
         maker.setUnbreakable(true);
-        maker.setLore("&7Iron Chestplate", "&7Flint and Steel", "  &7- Unbreaking X", "&7Lava Bucket&8 x5", "&7Splash Potion of Fire Resistance");
-        maker.setName("&aPyro");
+        maker.setLore("&7TNT&8 x16", "&7Redstone Block&8 x4", "&7Water Bucket", "&7Iron Boots", "  &8- Fall Protection III", "  &8- Blast Protection III");
+        maker.setName("&aCannoner");
         return maker.getItemStack();
     }
 
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
-        inventory.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        inventory.setItem(0, getFlint());
-        inventory.setItem(6, getPotion());
-        for (int i = 1; i < 6; i++) {
-            inventory.setItem(i, new ItemStack(Material.LAVA_BUCKET));
-        }
+        inventory.setBoots(getBoots());
+        inventory.setItem(0, new ItemStack(Material.TNT, 16));
+        inventory.setItem(1, new ItemStack(Material.REDSTONE_BLOCK, 4));
+        inventory.setItem(2, new ItemStack(Material.WATER_BUCKET, 64));
         return inventory;
     }
 
-    private ItemStack getPotion() {
-        ItemMaker maker = new ItemMaker(Material.SPLASH_POTION);
-        maker.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(Integer.MAX_VALUE, 1));
-        return maker.getItemStack();
-    }
-
-    private ItemStack getFlint() {
-        ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
-        maker.addEnchantment(Enchantment.DURABILITY, 10);
+    private ItemStack getBoots() {
+        ItemMaker maker = new ItemMaker(Material.IRON_BOOTS);
+        maker.addEnchantment(Enchantment.PROTECTION_FALL, 3);
+        maker.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 3);
         return maker.getItemStack();
     }
 }

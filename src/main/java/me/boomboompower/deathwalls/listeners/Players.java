@@ -18,15 +18,17 @@
 package me.boomboompower.deathwalls.listeners;
 
 import me.boomboompower.deathwalls.DeathWalls;
-import me.boomboompower.deathwalls.utils.Logging;
 import me.boomboompower.deathwalls.maker.SimpleScoreboard;
+import me.boomboompower.deathwalls.utils.Logging;
 
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -47,10 +49,22 @@ public class Players implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
+    private void onBlockPlace(BlockPlaceEvent event) {
+        Block block = event.getBlock();
+        if (block.getType() == Material.LOG) {
+            if (block.getData() == 1 || block.getData() == 5 || block.getData() == 9) {
+                block.setData((byte) 13);
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
     private void onBlockBreak(BlockBreakEvent event) {
         Location location = event.getBlock().getLocation();
         for (int i = 0; i < 6; i++) {
-            event.getPlayer().playEffect(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()), Effect.COLOURED_DUST, 0);
+            event.getPlayer().playEffect(new Location(location.getWorld(), location.getX() + 0.6, location.getY() + 0.6, location.getZ() + 0.6), Effect.COLOURED_DUST, 0);
+            event.getPlayer().playEffect(new Location(location.getWorld(), location.getX() + 0.5, location.getY() + 0.5, location.getZ() + 0.5), Effect.COLOURED_DUST, 0);
+            event.getPlayer().playEffect(new Location(location.getWorld(), location.getX() + 0.4, location.getY() + 0.4, location.getZ() + 0.4), Effect.COLOURED_DUST, 0);
         }
     }
 

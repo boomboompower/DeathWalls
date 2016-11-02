@@ -36,7 +36,7 @@ public final class Armorsmith {
     public ItemStack getIcon() {
         ItemMaker maker = new ItemMaker(Material.ANVIL);
         maker.setUnbreakable(true);
-        maker.setLore("&7Anvil", "&7Enchanted Book", "  &8- Protection IV", "  &8- Sharpness I", "&7Bottle o' Enchanting&8x64", "&7Diamond Helmet");
+        maker.setLore("&7Anvil", "&7Enchanted Book", "  &8- Protection IV", "  &8- Sharpness I", "&7Bottle o' Enchanting&8 x64", "&7Diamond Helmet");
         maker.setName("&aArmorsmith");
         return maker.getItemStack();
     }

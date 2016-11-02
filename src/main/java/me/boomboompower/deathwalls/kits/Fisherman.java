@@ -36,7 +36,7 @@ public final class Fisherman {
     public ItemStack getIcon() {
         ItemMaker maker = new ItemMaker(Material.FISHING_ROD);
         maker.setUnbreakable(true);
-        maker.setLore("&7Fishing Rod", "  &8- Knockback I", "  &8- Luck of the Sea X", "  &8- Lure VII", "&7Fish&8x16");
+        maker.setLore("&7Fishing Rod", "  &8- Knockback I", "  &8- Luck of the Sea X", "  &8- Lure VII", "&7Fish&8 x16");
         maker.setName("&aFisherman");
         return maker.getItemStack();
     }

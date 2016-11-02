@@ -22,46 +22,28 @@ import me.boomboompower.interfaces.KitInfo;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.potion.PotionEffectType;
 
-@KitInfo(name = "Pyro", creator = "boomboompower", version = "1.0")
-public final class Pyro {
+@KitInfo(name = "Hunter", creator = "boomboompower", version = "1.0")
+public final class Hunter {
 
-    public Pyro() {}
+    public Hunter() {}
 
     public ItemStack getIcon() {
-        ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
+        ItemMaker maker = new ItemMaker(Material.POTION);
         maker.setUnbreakable(true);
-        maker.setLore("&7Iron Chestplate", "&7Flint and Steel", "  &7- Unbreaking X", "&7Lava Bucket&8 x5", "&7Splash Potion of Fire Resistance");
-        maker.setName("&aPyro");
+        maker.setLore("&7Bow", "&7Arrow&8 x16");
+        maker.setName("&aHunter");
         return maker.getItemStack();
     }
 
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
-        inventory.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        inventory.setItem(0, getFlint());
-        inventory.setItem(6, getPotion());
-        for (int i = 1; i < 6; i++) {
-            inventory.setItem(i, new ItemStack(Material.LAVA_BUCKET));
-        }
+        inventory.setItem(0, new ItemStack(Material.BOW));
+        inventory.setItem(1, new ItemStack(Material.ARROW, 16));
         return inventory;
-    }
-
-    private ItemStack getPotion() {
-        ItemMaker maker = new ItemMaker(Material.SPLASH_POTION);
-        maker.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(Integer.MAX_VALUE, 1));
-        return maker.getItemStack();
-    }
-
-    private ItemStack getFlint() {
-        ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
-        maker.addEnchantment(Enchantment.DURABILITY, 10);
-        return maker.getItemStack();
     }
 }

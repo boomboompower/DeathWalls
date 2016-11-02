@@ -19,7 +19,6 @@ package me.boomboompower.deathwalls.kits;
 
 import me.boomboompower.deathwalls.maker.ItemMaker;
 import me.boomboompower.interfaces.KitInfo;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -27,41 +26,31 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.potion.PotionEffectType;
 
-@KitInfo(name = "Pyro", creator = "boomboompower", version = "1.0")
-public final class Pyro {
+@KitInfo(name = "Farmer", creator = "boomboompower", version = "1.0")
+public final class Farmer {
 
-    public Pyro() {}
+    public Farmer() {}
 
     public ItemStack getIcon() {
-        ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
+        ItemMaker maker = new ItemMaker(Material.GOLDEN_APPLE);
         maker.setUnbreakable(true);
-        maker.setLore("&7Iron Chestplate", "&7Flint and Steel", "  &7- Unbreaking X", "&7Lava Bucket&8 x5", "&7Splash Potion of Fire Resistance");
-        maker.setName("&aPyro");
+        maker.setLore("&7Iron Leggings", "  &8- Projectile Protection III", "&7Egg&8 x64", "&7Gold Apple");
+        maker.setName("&aFarmer");
         return maker.getItemStack();
     }
 
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
-        inventory.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        inventory.setItem(0, getFlint());
-        inventory.setItem(6, getPotion());
-        for (int i = 1; i < 6; i++) {
-            inventory.setItem(i, new ItemStack(Material.LAVA_BUCKET));
-        }
+        inventory.setLeggings(getLeggings());
+        inventory.setItem(0, new ItemStack(Material.EGG, 64));
+        inventory.setItem(1, new ItemStack(Material.GOLDEN_APPLE));
         return inventory;
     }
 
-    private ItemStack getPotion() {
-        ItemMaker maker = new ItemMaker(Material.SPLASH_POTION);
-        maker.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(Integer.MAX_VALUE, 1));
-        return maker.getItemStack();
-    }
-
-    private ItemStack getFlint() {
-        ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
-        maker.addEnchantment(Enchantment.DURABILITY, 10);
+    private ItemStack getLeggings() {
+        ItemMaker maker = new ItemMaker(Material.IRON_LEGGINGS);
+        maker.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
         return maker.getItemStack();
     }
 }

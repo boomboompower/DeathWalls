@@ -22,46 +22,33 @@ import me.boomboompower.interfaces.KitInfo;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.potion.PotionEffectType;
 
-@KitInfo(name = "Pyro", creator = "boomboompower", version = "1.0")
-public final class Pyro {
+@KitInfo(name = "Rookie", creator = "boomboompower", version = "1.0")
+public final class Rookie {
 
-    public Pyro() {}
+    public Rookie() {}
 
     public ItemStack getIcon() {
-        ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
+        ItemMaker maker = new ItemMaker(Material.WOOD_SWORD);
         maker.setUnbreakable(true);
-        maker.setLore("&7Iron Chestplate", "&7Flint and Steel", "  &7- Unbreaking X", "&7Lava Bucket&8 x5", "&7Splash Potion of Fire Resistance");
-        maker.setName("&aPyro");
+        maker.setLore("&7Wooden Sword", "&7Leather Helmet", "&7Leather Chestplate", "&7Leather Leggings", "&7Leather Boots", "&7Glass Blocks&7 x16", "&7Steak");
+        maker.setName("&aRookie");
         return maker.getItemStack();
     }
 
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
-        inventory.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        inventory.setItem(0, getFlint());
-        inventory.setItem(6, getPotion());
-        for (int i = 1; i < 6; i++) {
-            inventory.setItem(i, new ItemStack(Material.LAVA_BUCKET));
-        }
+        inventory.setHelmet(new ItemStack(Material.LEATHER_HELMET));
+        inventory.setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
+        inventory.setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
+        inventory.setBoots(new ItemStack(Material.LEATHER_BOOTS));
+        inventory.setItem(0, new ItemStack(Material.WOOD_SWORD));
+        inventory.setItem(1, new ItemStack(Material.GLASS, 16));
+        inventory.setItem(2, new ItemStack(Material.COOKED_BEEF));
         return inventory;
-    }
-
-    private ItemStack getPotion() {
-        ItemMaker maker = new ItemMaker(Material.SPLASH_POTION);
-        maker.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(Integer.MAX_VALUE, 1));
-        return maker.getItemStack();
-    }
-
-    private ItemStack getFlint() {
-        ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
-        maker.addEnchantment(Enchantment.DURABILITY, 10);
-        return maker.getItemStack();
     }
 }

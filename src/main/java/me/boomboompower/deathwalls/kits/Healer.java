@@ -22,46 +22,44 @@ import me.boomboompower.interfaces.KitInfo;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffectType;
 
-@KitInfo(name = "Pyro", creator = "boomboompower", version = "1.0")
-public final class Pyro {
+@KitInfo(name = "Healer", creator = "boomboompower", version = "1.0")
+public final class Healer {
 
-    public Pyro() {}
+    public Healer() {}
 
     public ItemStack getIcon() {
-        ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
+        ItemMaker maker = new ItemMaker(Material.POTION);
+        maker.addPotionEffect(PotionEffectType.REGENERATION.createEffect(10 * 20, 0));
         maker.setUnbreakable(true);
-        maker.setLore("&7Iron Chestplate", "&7Flint and Steel", "  &7- Unbreaking X", "&7Lava Bucket&8 x5", "&7Splash Potion of Fire Resistance");
-        maker.setName("&aPyro");
+        maker.setLore("&7Splash Potion of Healing&8 x3", "&7Splash Potion of Regeneration&8 x2");
+        maker.setName("&aHealer");
         return maker.getItemStack();
     }
 
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
-        inventory.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        inventory.setItem(0, getFlint());
-        inventory.setItem(6, getPotion());
-        for (int i = 1; i < 6; i++) {
-            inventory.setItem(i, new ItemStack(Material.LAVA_BUCKET));
-        }
+        inventory.setItem(0, getInstant());
+        inventory.setItem(1, getPotion());
         return inventory;
+    }
+
+    private ItemStack getInstant() {
+        ItemMaker maker = new ItemMaker(Material.SPLASH_POTION);
+        maker.setAmount(3);
+        maker.addPotionEffect(PotionEffectType.HEAL.createEffect(10, 1));
+        return maker.getItemStack();
     }
 
     private ItemStack getPotion() {
         ItemMaker maker = new ItemMaker(Material.SPLASH_POTION);
-        maker.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(Integer.MAX_VALUE, 1));
-        return maker.getItemStack();
-    }
-
-    private ItemStack getFlint() {
-        ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
-        maker.addEnchantment(Enchantment.DURABILITY, 10);
+        maker.setAmount(2);
+        maker.addPotionEffect(PotionEffectType.REGENERATION.createEffect(10 * 20, 1));
         return maker.getItemStack();
     }
 }

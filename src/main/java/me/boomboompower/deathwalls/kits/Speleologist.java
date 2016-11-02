@@ -27,41 +27,34 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.potion.PotionEffectType;
 
-@KitInfo(name = "Pyro", creator = "boomboompower", version = "1.0")
-public final class Pyro {
+@KitInfo(name = "Speleologist", creator = "boomboompower", version = "1.0")
+public final class Speleologist {
 
-    public Pyro() {}
+    public Speleologist() {}
 
+    @Deprecated
     public ItemStack getIcon() {
-        ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
+        ItemMaker maker = new ItemMaker(Material.IRON_AXE);
         maker.setUnbreakable(true);
-        maker.setLore("&7Iron Chestplate", "&7Flint and Steel", "  &7- Unbreaking X", "&7Lava Bucket&8 x5", "&7Splash Potion of Fire Resistance");
-        maker.setName("&aPyro");
+        maker.setLore("&7Iron Pickaxe", "  &8- Sharpness I", "  &8- Efficiency III", "  &8- Unbreaking III", "&7Stone&8 x16");
+        maker.setName("&aSpeleologist");
         return maker.getItemStack();
     }
 
+    @Deprecated
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
-        inventory.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        inventory.setItem(0, getFlint());
-        inventory.setItem(6, getPotion());
-        for (int i = 1; i < 6; i++) {
-            inventory.setItem(i, new ItemStack(Material.LAVA_BUCKET));
-        }
+        inventory.setItem(0, getPickaxe());
+        inventory.setItem(1, new ItemStack(Material.STONE, 16));
         return inventory;
     }
 
-    private ItemStack getPotion() {
-        ItemMaker maker = new ItemMaker(Material.SPLASH_POTION);
-        maker.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(Integer.MAX_VALUE, 1));
-        return maker.getItemStack();
-    }
-
-    private ItemStack getFlint() {
-        ItemMaker maker = new ItemMaker(Material.FLINT_AND_STEEL);
-        maker.addEnchantment(Enchantment.DURABILITY, 10);
+    private ItemStack getPickaxe() {
+        ItemMaker maker = new ItemMaker(Material.IRON_PICKAXE);
+        maker.addEnchantment(Enchantment.DIG_SPEED, 3);
+        maker.addEnchantment(Enchantment.DURABILITY, 3);
+        maker.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         return maker.getItemStack();
     }
 }

@@ -37,7 +37,7 @@ public final class Scout {
         ItemMaker maker = new ItemMaker(Material.POTION);
         maker.addPotionEffect(PotionEffectType.SPEED.createEffect(40 * 20, 0));
         maker.setUnbreakable(true);
-        maker.setLore("&7Stone Sword", "&7Potion of Speed&8x3");
+        maker.setLore("&7Stone Sword", "&7Potion of Speed&8 x3");
         maker.setName("&aScout");
         return maker.getItemStack();
     }

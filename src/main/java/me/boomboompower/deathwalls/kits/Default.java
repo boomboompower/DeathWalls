@@ -27,7 +27,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-@KitInfo(name = "Default", creator = "boomboompower", version = "1.0")
+@KitInfo(name = "Default", creator = "boomboompower", version = "1.1")
 public final class Default {
 
     public Default() {}
@@ -35,18 +35,16 @@ public final class Default {
     public ItemStack getIcon() {
         ItemMaker maker = new ItemMaker(Material.WOOD_SWORD);
         maker.setUnbreakable(true);
-        maker.setLore("&7Wooden Sword", "&7Leather Helmet", "&7Leather Chestplate", "&7Leather Leggings", "&7Leather Boots");
+        maker.setLore("&7Wooden Axe", "&7Wooden Pickaxe", "&7Wooden Shovel");
         maker.setName("&aDefault");
         return maker.getItemStack();
     }
 
     public Inventory getInventory() {
         PlayerInventory inventory = (PlayerInventory) Bukkit.createInventory(null, InventoryType.PLAYER);
-        inventory.setHelmet(new ItemStack(Material.LEATHER_HELMET));
-        inventory.setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
-        inventory.setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
-        inventory.setBoots(new ItemStack(Material.LEATHER_BOOTS));
-        inventory.setItem(0, new ItemStack(Material.WOOD_SWORD));
+        inventory.setItem(0, new ItemStack(Material.WOOD_AXE));
+        inventory.setItem(1, new ItemStack(Material.WOOD_PICKAXE));
+        inventory.setItem(2, new ItemStack(Material.WOOD_SPADE));
         return inventory;
     }
 }
