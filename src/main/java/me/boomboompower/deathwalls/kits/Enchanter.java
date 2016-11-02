@@ -33,7 +33,7 @@ public final class Enchanter {
     public Enchanter() {}
 
     public ItemStack getIcon() {
-        ItemMaker maker = new ItemMaker(Material.ANVIL);
+        ItemMaker maker = new ItemMaker(Material.BOOKSHELF);
         maker.setUnbreakable(true);
         maker.setLore("&7Enchanting Table", "&7Bottle o' Enchanting&8 x64", "&7Bookshelf&8 x8");
         maker.setName("&aEnchanter");

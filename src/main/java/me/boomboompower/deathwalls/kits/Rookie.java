@@ -33,7 +33,7 @@ public final class Rookie {
     public Rookie() {}
 
     public ItemStack getIcon() {
-        ItemMaker maker = new ItemMaker(Material.WOOD_SWORD);
+        ItemMaker maker = new ItemMaker(Material.GLASS);
         maker.setUnbreakable(true);
         maker.setLore("&7Wooden Sword", "&7Leather Helmet", "&7Leather Chestplate", "&7Leather Leggings", "&7Leather Boots", "&7Glass Blocks&7 x16", "&7Steak");
         maker.setName("&aRookie");

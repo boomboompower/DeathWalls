@@ -33,7 +33,7 @@ public final class Hunter {
     public Hunter() {}
 
     public ItemStack getIcon() {
-        ItemMaker maker = new ItemMaker(Material.POTION);
+        ItemMaker maker = new ItemMaker(Material.BOW);
         maker.setUnbreakable(true);
         maker.setLore("&7Bow", "&7Arrow&8 x16");
         maker.setName("&aHunter");

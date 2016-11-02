@@ -35,7 +35,7 @@ public final class Speleologist {
 
     @Deprecated
     public ItemStack getIcon() {
-        ItemMaker maker = new ItemMaker(Material.IRON_AXE);
+        ItemMaker maker = new ItemMaker(Material.IRON_PICKAXE);
         maker.setUnbreakable(true);
         maker.setLore("&7Iron Pickaxe", "  &8- Sharpness I", "  &8- Efficiency III", "  &8- Unbreaking III", "&7Stone&8 x16");
         maker.setName("&aSpeleologist");
