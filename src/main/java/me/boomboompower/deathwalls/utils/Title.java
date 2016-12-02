@@ -39,7 +39,7 @@ public class Title {
      * @param stay The time the title is displayed
      * @param fadeOut The time the title takes to fade out
      */
-    public void sendTitle(Player player, String title, String subtitle, int fadeIn, int stay, int fadeOut) {
+    public static void sendTitle(Player player, String title, String subtitle, int fadeIn, int stay, int fadeOut) {
         try {
             title = Logging.colored(title.replace('"', '\"'));
             subtitle = Logging.colored(title.replace('"', '\"'));
@@ -66,7 +66,7 @@ public class Title {
      * @param player Player to send packet to
      * @param packet Packet to send to player
      */
-    private void sendPacket(Player player, Object packet) {
+    private static void sendPacket(Player player, Object packet) {
         try {
             Object handle = player.getClass().getMethod("getHandle").invoke(player);
             Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
@@ -81,7 +81,7 @@ public class Title {
      * @param name ClassName
      * @return NMS Class
      */
-    private Class<?> getNMSClass(String name) {
+    private static Class<?> getNMSClass(String name) {
         try {
             return Class.forName("net.minecraft.server" + Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3] + "." + name);
         } catch(Exception ex) {

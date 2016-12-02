@@ -25,15 +25,36 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * All entity-related utils.
+ */
 public class Entities {
 
     private Entities() {}
 
+	/**
+	 * Gets a list of entities from every world.
+	 *
+	 * @return A list of entities from all worlds
+	 */
 	public static Collection<? extends Entity> getAllEntities() {
-		List<Entity> entities = new ArrayList<Entity>();
+	    List<Entity> entities = new ArrayList<Entity>();
 		for (World world : Bukkit.getWorlds()) {
 			entities.addAll(world.getEntities());
 		}
 		return entities;
 	}
+
+    /**
+     * OOP technique for entity renaming.
+     *
+     * <p>If the entity has '<i>CustomNameVisible</i>' attribute off it will be toggled one</p>
+     *
+     * @param entity Entity to rename
+     * @param name The name to be given to the entity. Supports colors
+     */
+	public void rename(Entity entity, String name) {
+	    entity.setCustomName(Logging.colored(name));
+	    if (!entity.isCustomNameVisible()) entity.setCustomNameVisible(true);
+    }
 }

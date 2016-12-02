@@ -97,6 +97,12 @@
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
+            <artifactId>minecraft-server</artifactId>
+            <version>1.10.2-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.10.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>

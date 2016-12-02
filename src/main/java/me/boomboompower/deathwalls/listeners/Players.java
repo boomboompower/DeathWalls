@@ -20,7 +20,7 @@ package me.boomboompower.deathwalls.listeners;
 import me.boomboompower.deathwalls.DeathWalls;
 import me.boomboompower.deathwalls.maker.SimpleScoreboard;
 import me.boomboompower.deathwalls.utils.Logging;
-
+import me.boomboompower.deathwalls.utils.Title;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
@@ -71,7 +71,13 @@ public class Players implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     private void onPlayerDeath(PlayerDeathEvent event) {
         sendScoreboard(event.getEntity().getKiller());
-
+        Title.sendTitle(event.getEntity(),
+                "&c&bYOU DIED",
+                "&fYou have been eliminated from the game",
+                10,
+                60,
+                10
+        );
         for (Player player : players) {
             Logging.sendToPlayer(player, "&e" + event.getEntity().getName() + "&f has been eliminated by &e" + event.getEntity().getKiller().getName() + "&f!");
         }
