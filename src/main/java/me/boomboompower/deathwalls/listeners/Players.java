@@ -79,7 +79,8 @@ public class Players implements Listener {
                 10
         );
         for (Player player : players) {
-            Logging.sendToPlayer(player, "&e" + event.getEntity().getName() + "&f has been eliminated by &e" + event.getEntity().getKiller().getName() + "&f!");
+            Logging.sendToPlayer(player,
+                    "&e" + event.getEntity().getName() + "&f has been eliminated by &e" + event.getEntity().getKiller().getName() + "&f!");
         }
     }
 
