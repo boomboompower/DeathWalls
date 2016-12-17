@@ -73,7 +73,7 @@ public class Actionbar {
         if (italic) full = ChatColor.ITALIC + full;
         if (magic) full = ChatColor.MAGIC + full;
         if (bold) full = ChatColor.BOLD + full;
-        last = color + full + message.replace('"', '\"');
+        last = color + full + message.replace('"', '\"').replace("\\n", "");
         built = true;
     }
 

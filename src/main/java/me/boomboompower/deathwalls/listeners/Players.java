@@ -17,10 +17,13 @@
 
 package me.boomboompower.deathwalls.listeners;
 
+import com.google.common.collect.Maps;
+
 import me.boomboompower.deathwalls.DeathWalls;
 import me.boomboompower.deathwalls.maker.SimpleScoreboard;
 import me.boomboompower.deathwalls.utils.Logging;
 import me.boomboompower.deathwalls.utils.Title;
+
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
@@ -35,16 +38,20 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Players implements Listener {
 
     private DeathWalls deathWalls;
     private ArrayList<Player> players;
+    private HashMap<Player, File> data;
 
     public Players(DeathWalls main) {
         deathWalls = main;
         players = new ArrayList<Player>();
+        data = Maps.newHashMap();
         Bukkit.getPluginManager().registerEvents(this, main);
     }
 
@@ -100,6 +107,12 @@ public class Players implements Listener {
         } else {
             players.add(player);
             sendScoreboard(player);
+            File data = new File(deathWalls.getDataFolder(), player.getUniqueId().toString());
+            if (!data.exists()) {
+                data.mkdirs();
+            }
+
+            this.data.put(player, data);
         }
     }
 
@@ -115,11 +128,8 @@ public class Players implements Listener {
         if (entity instanceof EnderPearl) m = m.replace("%e", "ender pearl");
 
         if (shooter instanceof Player) {
-            Player player = (Player) shooter;
-
-            for(Player players : Bukkit.getOnlinePlayers()){
-                players.sendMessage(Logging.colored(m.replace("%p", player.getName())));
-
+            for (Player players : Bukkit.getOnlinePlayers()) {
+                players.sendMessage(Logging.colored(m.replace("%p", shooter.getName())));
             }
         }
     }

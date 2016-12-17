@@ -17,6 +17,7 @@
 
 package me.boomboompower.deathwalls.utils;
 
+import me.boomboompower.interfaces.Deprecation;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -40,6 +41,11 @@ public class Logging {
         logToConsole(message, LogType.REGULAR);
     }
 
+    @Deprecated
+    public static void windowsConsole(String message, Object... args) {
+        System.console().printf(message, args);
+    }
+
     public static void logToConsole(String message, LogType type) {
         Bukkit.getConsoleSender().sendMessage(colored(type.getMessage() + message));
     }
@@ -51,6 +57,7 @@ public class Logging {
     public enum LogType {
         REGULAR("&f"),
         WARNING("&6[WARNING] "),
+        DEBUG("&d[DEBUG] "),
         ERROR("&c[ERROR] "),
         UNKNOWN("&7[?] ");
 

@@ -25,7 +25,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class DeathWalls extends JavaPlugin {
 
-    public static void main(String[] args) {}
+    public static void main(String[] args) {
+        Logging.windowsConsole("This program is to be run with Bukkit");
+        Logging.windowsConsole("Shutting down DeathWalls ");
+    }
 
     @Override
     public void onEnable() {
